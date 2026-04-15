@@ -282,6 +282,12 @@ export default function Home() {
             <a href="#faq" className="text-sm text-muted hover:text-white transition-colors">
               FAQ
             </a>
+            <a href="/blog" className="text-sm text-muted hover:text-white transition-colors">
+              Blog
+            </a>
+            <a href="/roadmap" className="text-sm text-muted hover:text-white transition-colors">
+              Roadmap
+            </a>
           </div>
 
           <a
