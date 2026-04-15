@@ -16,6 +16,8 @@ import {
   Zap,
   MousePointerClick,
   Eye,
+  Menu,
+  X,
 } from "lucide-react";
 import type { Variants } from "framer-motion";
 
@@ -247,6 +249,7 @@ const proTier = [
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -290,16 +293,54 @@ export default function Home() {
             </a>
           </div>
 
-          <a
-            href={APP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-green hover:bg-green-dim text-black font-medium text-sm px-4 py-2 rounded-lg transition-colors"
-          >
-            Launch Radar
-            <ArrowRight className="w-4 h-4" />
-          </a>
+          <div className="flex items-center gap-3">
+            <a
+              href={APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-2 bg-green hover:bg-green-dim text-black font-medium text-sm px-4 py-2 rounded-lg transition-colors"
+            >
+              Launch Radar
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="md:hidden p-2 text-muted hover:text-white transition-colors"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden border-t border-white/[0.07] bg-bg/95 backdrop-blur-xl"
+            >
+              <div className="px-4 py-4 flex flex-col gap-3">
+                <a href="#features" onClick={() => setMobileMenuOpen(false)} className="text-sm text-muted hover:text-white transition-colors py-2">Features</a>
+                <a href="#pricing" onClick={() => setMobileMenuOpen(false)} className="text-sm text-muted hover:text-white transition-colors py-2">Pricing</a>
+                <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-sm text-muted hover:text-white transition-colors py-2">FAQ</a>
+                <a href="/blog" className="text-sm text-muted hover:text-white transition-colors py-2">Blog</a>
+                <a href="/roadmap" className="text-sm text-muted hover:text-white transition-colors py-2">Roadmap</a>
+                <a
+                  href={APP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-green hover:bg-green-dim text-black font-medium text-sm px-4 py-2.5 rounded-lg transition-colors mt-1"
+                >
+                  Launch Radar
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       <main>
@@ -532,9 +573,7 @@ export default function Home() {
                   ))}
                 </ul>
                 <a
-                  href={APP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="/upgrade"
                   className="block w-full text-center py-3 rounded-lg bg-green hover:bg-green-dim text-black font-semibold text-sm transition-colors"
                 >
                   Upgrade to Pro
@@ -655,7 +694,7 @@ export default function Home() {
                 Twitter
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/gmadureiraa/defi-radar-landing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted hover:text-white transition-colors"

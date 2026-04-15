@@ -8,6 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://defi-radar-landing.vercel.app"),
   title: "DeFi Radar — Real-Time DeFi Intelligence",
   description:
     "Track yields, protocols, predictions, and market trends across 200+ DeFi protocols and 50+ chains.",
